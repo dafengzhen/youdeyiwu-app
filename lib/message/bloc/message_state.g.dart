@@ -7,7 +7,9 @@ part of 'message_state.dart';
 // **************************************************************************
 
 abstract class _$MessageStateCWProxy {
-  MessageState details(UserDetailsClientVo? details);
+  MessageState data(PageVo<MessageClientVo>? data);
+
+  MessageState currentMessage(MessageVo? currentMessage);
 
   MessageState isLoading(bool? isLoading);
 
@@ -18,7 +20,8 @@ abstract class _$MessageStateCWProxy {
   /// MessageState(...).copyWith(id: 12, name: "My name")
   /// ````
   MessageState call({
-    UserDetailsClientVo? details,
+    PageVo<MessageClientVo>? data,
+    MessageVo? currentMessage,
     bool? isLoading,
   });
 }
@@ -30,7 +33,11 @@ class _$MessageStateCWProxyImpl implements _$MessageStateCWProxy {
   final MessageState _value;
 
   @override
-  MessageState details(UserDetailsClientVo? details) => this(details: details);
+  MessageState data(PageVo<MessageClientVo>? data) => this(data: data);
+
+  @override
+  MessageState currentMessage(MessageVo? currentMessage) =>
+      this(currentMessage: currentMessage);
 
   @override
   MessageState isLoading(bool? isLoading) => this(isLoading: isLoading);
@@ -44,14 +51,19 @@ class _$MessageStateCWProxyImpl implements _$MessageStateCWProxy {
   /// MessageState(...).copyWith(id: 12, name: "My name")
   /// ````
   MessageState call({
-    Object? details = const $CopyWithPlaceholder(),
+    Object? data = const $CopyWithPlaceholder(),
+    Object? currentMessage = const $CopyWithPlaceholder(),
     Object? isLoading = const $CopyWithPlaceholder(),
   }) {
     return MessageState(
-      details: details == const $CopyWithPlaceholder()
-          ? _value.details
+      data: data == const $CopyWithPlaceholder()
+          ? _value.data
           // ignore: cast_nullable_to_non_nullable
-          : details as UserDetailsClientVo?,
+          : data as PageVo<MessageClientVo>?,
+      currentMessage: currentMessage == const $CopyWithPlaceholder()
+          ? _value.currentMessage
+          // ignore: cast_nullable_to_non_nullable
+          : currentMessage as MessageVo?,
       isLoading: isLoading == const $CopyWithPlaceholder()
           ? _value.isLoading
           // ignore: cast_nullable_to_non_nullable

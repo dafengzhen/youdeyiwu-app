@@ -1,4 +1,6 @@
-import 'package:youdeyiwu_app/model/vo/user/user_details_client_vo.dart';
+import 'package:youdeyiwu_app/model/vo/message/message_client_vo.dart';
+import 'package:youdeyiwu_app/model/vo/message/message_vo.dart';
+import 'package:youdeyiwu_app/model/vo/page_vo.dart';
 
 /// MessageEvent
 abstract class MessageEvent {
@@ -7,10 +9,28 @@ abstract class MessageEvent {
 
 /// UpdateDataMessageEvent
 class UpdateDataMessageEvent extends MessageEvent {
-  final UserDetailsClientVo? details;
+  final PageVo<MessageClientVo>? data;
 
   const UpdateDataMessageEvent({
-    this.details,
+    this.data,
+  }) : super();
+}
+
+/// MergeMessageDataMessageEvent
+class MergeMessageDataMessageEvent extends MessageEvent {
+  final PageVo<MessageClientVo> data;
+
+  const MergeMessageDataMessageEvent({
+    required this.data,
+  }) : super();
+}
+
+/// UpdateCurrentMessageMessageEvent
+class UpdateCurrentMessageMessageEvent extends MessageEvent {
+  final MessageVo? currentMessage;
+
+  const UpdateCurrentMessageMessageEvent({
+    this.currentMessage,
   }) : super();
 }
 

@@ -6,6 +6,8 @@ import 'package:youdeyiwu_app/message/bloc/message_state.dart';
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
   MessageBloc() : super(const MessageState()) {
     on<UpdateDataMessageEvent>(_updateDataMessageEvent);
+    on<MergeMessageDataMessageEvent>(_mergeMessageDataMessageEvent);
+    on<UpdateCurrentMessageMessageEvent>(_updateCurrentMessageMessageEvent);
     on<UpdateIsLoadingMessageEvent>(_updateIsLoadingMessageEvent);
   }
 
@@ -15,7 +17,30 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
     Emitter<MessageState> emit,
   ) {
     emit(state.copyWith(
-      details: event.details,
+      data: event.data,
+    ));
+  }
+
+  /// _mergeMessageDataMessageEvent
+  void _mergeMessageDataMessageEvent(
+    MergeMessageDataMessageEvent event,
+    Emitter<MessageState> emit,
+  ) {
+    var data = state.data;
+    data!.content.addAll(event.data.content);
+    data.pageable = event.data.pageable;
+    emit(state.copyWith(
+      data: data,
+    ));
+  }
+
+  /// _updateCurrentMessageMessageEvent
+  void _updateCurrentMessageMessageEvent(
+    UpdateCurrentMessageMessageEvent event,
+    Emitter<MessageState> emit,
+  ) {
+    emit(state.copyWith(
+      currentMessage: event.currentMessage,
     ));
   }
 
